@@ -1,0 +1,52 @@
+# ===========================================
+# GITIGNORE PARA PROYECTO MAESTRÍA DATOS
+# ===========================================
+
+# Archivos sensibles
+.env
+Accesos.txt
+.env.local
+.env.production
+
+# Datos de bases de datos
+data/
+mysql/data/
+metabase/
+superset/
+
+# Datasets de prueba (se descargan automáticamente)
+mysql/init/*.dump
+test_db-master/
+
+# Logs
+logs/
+*.log
+
+# Backups
+backups/
+*.sql
+*.sql.gz
+
+# Archivos temporales
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo

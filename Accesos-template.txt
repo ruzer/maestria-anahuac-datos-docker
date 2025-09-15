@@ -1,0 +1,71 @@
+========================================
+ ENTORNO DE MODELADO AVANZADO DE DATOS
+========================================
+
+📌 MySQL
+----------------------------------------
+Host: localhost
+Puerto: 3306
+Base de datos: curso
+Usuario: alumno
+Contraseña: [Ver archivo .env]
+Root Password: [Ver archivo .env]
+
+Acceso rápido desde consola:
+mysql -h 127.0.0.1 -P 3306 -u alumno -p
+
+----------------------------------------
+
+📌 Adminer
+----------------------------------------
+URL: http://localhost:8080
+Server: mysql
+Usuario: alumno
+Contraseña: [Ver archivo .env]
+Base de datos: curso
+
+----------------------------------------
+
+📌 Metabase
+----------------------------------------
+URL: http://localhost:3000
+Usuario inicial: Se crea en el primer login
+Conexión a MySQL desde Metabase:
+- Host: mysql
+- Puerto: 3306
+- Usuario: alumno
+- Contraseña: [Ver archivo .env]
+- Base de datos: curso
+
+----------------------------------------
+
+📌 Superset
+----------------------------------------
+URL: http://localhost:8088
+Usuario inicial: admin
+Contraseña: Admin123!
+
+Conexión a MySQL desde Superset:
+mysql+pymysql://alumno:[PASSWORD]@mysql:3306/curso
+
+----------------------------------------
+
+📌 Jupyter Notebook
+----------------------------------------
+URL: http://localhost:8888
+Token: maestria2024
+
+----------------------------------------
+
+📌 Backups automáticos (MySQL)
+----------------------------------------
+Carpeta local: ./backups
+Retención: 30 días
+Frecuencia: diario 02:00 am
+
+========================================
+Notas de Seguridad:
+- Las contraseñas están en el archivo .env
+- NUNCA subas el archivo .env al repositorio
+- Usa .env.example para plantillas
+========================================
