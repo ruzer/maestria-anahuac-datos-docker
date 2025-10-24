@@ -58,11 +58,13 @@ directories=(
     "logs/mysql"
     "logs/metabase"
     "logs/superset"
+    "logs/streamlit"
     "backups"
     "notebooks"
     "config/superset"
     "mysql/init"
     "mysql/conf.d"
+    "streamlit/app"
 )
 
 for dir in "${directories[@]}"; do
@@ -158,6 +160,7 @@ echo "================================================"
 print_info "Adminer (Gestión DB):    http://localhost:8080"
 print_info "Metabase (BI):          http://localhost:3000"
 print_info "Superset (BI):          http://localhost:8088"
+print_info "Streamlit App:          http://localhost:8501"
 print_info "Jupyter Notebook:       http://localhost:8888"
 echo "================================================"
 

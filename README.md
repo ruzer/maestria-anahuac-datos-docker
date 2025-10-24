@@ -11,6 +11,7 @@ Entorno completo de análisis de datos para las clases de **Bases de Datos e Int
 | **Adminer** | 8080 | Administrador web de BD |
 | **Metabase** | 3000 | Herramienta de Business Intelligence |
 | **Apache Superset** | 8088 | Plataforma de visualización |
+| **Streamlit** | 8501 | Explorador interactivo de datos |
 | **Jupyter Notebook** | 8888 | Análisis de datos con Python |
 | **MySQL Backup** | - | Respaldos automáticos |
 
@@ -35,3 +36,8 @@ chmod +x setup.sh
 ```
 
 ## 📁 Estructura del Proyecto
+- `docker-compose.yml`: Orquestador de todos los servicios.
+- `streamlit/`: Imagen y aplicación Streamlit conectada a MySQL y datasets locales.
+- `config/`, `data/`, `logs/`: Directorios montados en contenedores para configuración, información y trazas.
+- `notebooks/`: Espacio de trabajo compartido para Jupyter.
+- `mysql/`: Inicialización y configuraciones personalizadas de la base de datos.

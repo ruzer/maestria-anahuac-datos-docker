@@ -42,8 +42,8 @@ Conexión a MySQL desde Metabase:
 📌 Superset
 ----------------------------------------
 URL: http://localhost:8088
-Usuario inicial: admin
-Contraseña: Admin123!
+Usuario inicial: admin (definido en .env)
+Contraseña: Admin123! (definido en .env)
 
 Conexión a MySQL desde Superset:
 mysql+pymysql://alumno:[PASSWORD]@mysql:3306/curso
@@ -54,6 +54,14 @@ mysql+pymysql://alumno:[PASSWORD]@mysql:3306/curso
 ----------------------------------------
 URL: http://localhost:8888
 Token: maestria2024
+
+----------------------------------------
+
+📌 Streamlit
+----------------------------------------
+URL: http://localhost:8501
+Descripción: Explorador interactivo conectado a MySQL y datasets locales
+Credenciales base: usa las variables definidas en .env (usuario alumno por defecto)
 
 ----------------------------------------
 

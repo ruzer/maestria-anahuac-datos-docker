@@ -30,6 +30,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d:ro
+      - ./mysql/conf.d:/etc/mysql/conf.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 30s
@@ -82,7 +83,7 @@ services:
       - maestria_network
 
   metabase:
-    image: metabase/metabase:v0.51.2
+    image: metabase/metabase:latest
     container_name: maestria_metabase
     restart: unless-stopped
     environment:
@@ -166,6 +167,9 @@ services:
       TZ: ${TZ}
       PYTHONPATH: /app/pythonpath:/app/superset_home
       SUPERSET_CONFIG_PATH: /app/superset_home/superset_config.py
+      SUPERSET_ADMIN_USERNAME: ${SUPERSET_ADMIN_USERNAME}
+      SUPERSET_ADMIN_PASSWORD: ${SUPERSET_ADMIN_PASSWORD}
+      SUPERSET_ADMIN_EMAIL: ${SUPERSET_ADMIN_EMAIL}
     ports:
       - "${SUPERSET_PORT:-8088}:8088"
     volumes:
@@ -195,7 +199,9 @@ services:
 
   # Servicio adicional para análisis de datos
   jupyter:
-    image: jupyter/datascience-notebook:latest
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
     container_name: maestria_jupyter
     restart: unless-stopped
     environment:
@@ -221,6 +227,47 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    networks:
+      - maestria_network
+
+  streamlit:
+    build:
+      context: ./streamlit
+      dockerfile: Dockerfile
+    container_name: maestria_streamlit
+    restart: unless-stopped
+    environment:
+      STREAMLIT_SERVER_PORT: 8501
+      STREAMLIT_SERVER_ENABLE_CORS: "false"
+      STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION: "false"
+      STREAMLIT_SERVER_HEADLESS: "true"
+      MYSQL_HOST: mysql
+      MYSQL_PORT: "3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: ${TZ}
+    ports:
+      - "${STREAMLIT_PORT:-8501}:8501"
+    volumes:
+      - ./streamlit/app:/app
+      - ./data/datasets:/data/datasets:ro
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1.0'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+    depends_on:
+      mysql:
+        condition: service_healthy
     networks:
       - maestria_network
 
